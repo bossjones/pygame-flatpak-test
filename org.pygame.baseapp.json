@@ -30,7 +30,7 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://sourceforge.net/projects/mikmod/files/outdated_versions/libmikmod/3.3.10/libmikmod-3.3.10.tar.gz/download",
+                    "url": "https://sourceforge.net/projects/mikmod/files/outdated_versions/libmikmod/3.3.10/libmikmod-3.3.10.tar.gz",
                     "sha256": "00b3f5298431864ebd069de793ec969cfea3ae6f340f6dfae1ff7da1ae24ef48"
                 }
             ]
@@ -41,7 +41,7 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://sourceforge.net/projects/fluidsynth/files/fluidsynth-1.1.6/fluidsynth-1.1.6.tar.bz2/download",
+                    "url": "https://sourceforge.net/projects/fluidsynth/files/fluidsynth-1.1.6/fluidsynth-1.1.6.tar.bz2",
                     "sha256": "d28b47dfbf7f8e426902ae7fa2981d821fbf84f41da9e1b85be933d2d748f601"
                 },
                 {
@@ -105,7 +105,7 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://sourceforge.net/projects/portmedia/files/portmidi/217/portmidi-src-217.zip/download",
+                    "url": "https://sourceforge.net/projects/portmedia/files/portmidi/217/portmidi-src-217.zip",
                     "sha256": "08e9a892bd80bdb1115213fb72dc29a7bf2ff108b378180586aa65f3cfd42e0f"
                 },
                 {
