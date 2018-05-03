@@ -1,10 +1,27 @@
 build_dir = build/aliens
 
+remote-add:
+	flatpak remote-add --no-gpg-verify --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+	flatpak remote-add --no-gpg-verify gnome https://sdk.gnome.org/gnome.flatpakrepo
+	flatpak --user remote-add --no-gpg-verify --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+	flatpak --user remote-add --no-gpg-verify --if-not-exists gnome https://sdk.gnome.org/gnome.flatpakrepo
+
 install-runtime:
 	# Install the freedesktop 1.4 platform and SDK (runtime for building the app)
-	flatpak remote-add --if-not-exists gnome http://sdk.gnome.org/repo/
+	# flatpak remote-add --if-not-exists gnome http://sdk.gnome.org/repo/
+	wget -P /home/developer https://sdk.gnome.org/keys/gnome-sdk.gpg
+	wget -P /home/developer https://sdk.gnome.org/keys/gnome-sdk-autobuilder.gpg
+	flatpak --user remote-add --no-gpg-verify gnome https://sdk.gnome.org/gnome.flatpakrepo
+	flatpak remote-add --no-gpg-verify gnome https://sdk.gnome.org/gnome.flatpakrepo
+	flatpak --user install gnome org.freedesktop.Sdk//1.4 || true
+	flatpak --user install gnome org.freedesktop.Platform//1.4 || true
 	flatpak install gnome org.freedesktop.Sdk//1.4 || true
 	flatpak install gnome org.freedesktop.Platform//1.4 || true
+	flatpak remotes
+	flatpak --user remote-list --show-details
+	flatpak --user list --runtime --show-details
+	flatpak remote-list --show-details
+	flatpak list --runtime --show-details
 
 build-aliens.done: Makefile install-baseapp-py36.done
 	# Main build steps - set up $(build_dir) and build the app in it.
@@ -83,3 +100,9 @@ build-install:
 		install -TD icons/pygame_snake_$$size.png \
 			/app/share/icons/hicolor/$${size}x$${size}/apps/org.pygame.aliens.png ; \
 	done
+
+delete-remotes:
+	flatpak --user remote-delete --force gnome
+	flatpak --user remote-delete --force flathub
+	flatpak remote-delete --force gnome
+	flatpak remote-delete --force flathub
