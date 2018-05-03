@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 """This is copied into the project directory and run in the flatpak build environment.
 
 It installs the necessary files for the game into the /app prefix.
@@ -42,7 +44,7 @@ def main():
                     ignore=ignore_patterns('__pycache__', '*.pyc'))
         else:
             copy2(file, str(install_dir))
-    
+
     # Icons
     print("Installing icons")
     for size, path in config['icons'].items():
@@ -50,14 +52,14 @@ def main():
                         size=size, appid=config['appid'])
         os.makedirs(os.path.dirname(target_path), exist_ok=True)
         copy2(path, target_path)
-    
+
     # Desktop file
     print("Writing desktop file")
     desktop_target = '/app/share/applications/{}.desktop'.format(config['appid'])
     os.makedirs(os.path.dirname(desktop_target), exist_ok=True)
     with open(desktop_target, 'w') as f:
         f.write(DESKTOP_TEMPLATE.format_map(config))
-    
+
     # Launcher
     print("Creating launch script")
     module, func = config['entry-point'].split(':')
@@ -65,7 +67,8 @@ def main():
     with launcher_file.open('w') as f:
         f.write(LAUNCHER_TEMPLATE.format(
             python=python_paths[config['python']],
-            mod = module, func=func
+            mod = module,
+            func=func
         ))
     launcher_file.chmod(0o755)
     Path('/app/bin/launch-game').symlink_to(launcher_file)

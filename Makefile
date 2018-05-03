@@ -26,9 +26,13 @@ install-runtime:
 # install freedesktop stuff under user space
 	flatpak --user install gnome org.freedesktop.Sdk//1.4 || true
 	flatpak --user install gnome org.freedesktop.Platform//1.4 || true
+	flatpak --user install gnome org.freedesktop.Sdk//1.6 || true
+	flatpak --user install gnome org.freedesktop.Platform//1.6 || true
 # install freedesktop stuff globaly
 	flatpak install gnome org.freedesktop.Sdk//1.4 || true
 	flatpak install gnome org.freedesktop.Platform//1.4 || true
+	flatpak install gnome org.freedesktop.Sdk//1.6 || true
+	flatpak install gnome org.freedesktop.Platform//1.6 || true
 	flatpak remotes
 	flatpak --user remote-list --show-details
 	flatpak --user list --runtime --show-details

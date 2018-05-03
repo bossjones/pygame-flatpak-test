@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import json
 from pathlib import Path
 import pytoml
@@ -51,7 +53,7 @@ class Flatpacker:
         # pytoml isn't in the build environment, so store the config as JSON
         with (self.packing_dir / 'config.json').open('w') as f:
             json.dump(self.config, f, indent=2)
-            
+
         run(['flatpak', 'build', str(self.build_dir), '/usr/bin/python3',
                 str(build_script)], cwd=str(self.project_dir), check=True)
 
@@ -63,6 +65,10 @@ class Flatpacker:
 
         baseapp = 'org.pygame.BaseApp-py{}{}'.format(*self.config['python'].split('.'))
         get_baseapp(baseapp)
+
+        print("build-init --base"+baseapp+str(self.build_dir)+self.config['appid']+
+        'org.freedesktop.Sdk'+'org.freedesktop.Platform'+"1.4")
+
         flatpak('build-init', '--base', baseapp, str(self.build_dir), self.config['appid'],
                 'org.freedesktop.Sdk', 'org.freedesktop.Platform', '1.4')
         self.call_build_script()
@@ -96,7 +102,7 @@ def check_config(config):
 def main(argv=None):
     if argv is None:
         argv = sys.argv
-    
+
     config_path = Path(argv[1]).resolve()
     packer = Flatpacker(config_path)
     packer.build()
