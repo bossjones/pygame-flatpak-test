@@ -2,7 +2,7 @@ build_dir = build/aliens
 
 remote-add:
 	flatpak remote-add --no-gpg-verify --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-	flatpak remote-add --no-gpg-verify gnome https://sdk.gnome.org/gnome.flatpakrepo
+	flatpak remote-add --no-gpg-verify --if-not-exists gnome https://sdk.gnome.org/gnome.flatpakrepo
 	flatpak --user remote-add --no-gpg-verify --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	flatpak --user remote-add --no-gpg-verify --if-not-exists gnome https://sdk.gnome.org/gnome.flatpakrepo
 
@@ -11,10 +11,22 @@ install-runtime:
 	# flatpak remote-add --if-not-exists gnome http://sdk.gnome.org/repo/
 	wget -P /home/developer https://sdk.gnome.org/keys/gnome-sdk.gpg
 	wget -P /home/developer https://sdk.gnome.org/keys/gnome-sdk-autobuilder.gpg
-	flatpak --user remote-add --no-gpg-verify gnome https://sdk.gnome.org/gnome.flatpakrepo
-	flatpak remote-add --no-gpg-verify gnome https://sdk.gnome.org/gnome.flatpakrepo
+	# flatpak --user remote-add --no-gpg-verify gnome https://sdk.gnome.org/gnome.flatpakrepo
+	# flatpak remote-add --no-gpg-verify gnome https://sdk.gnome.org/gnome.flatpakrepo
+# install gnome under user space
+	flatpak --user install gnome org.gnome.Platform//3.22 || true
+	flatpak --user install gnome org.gnome.Sdk//3.22 || true
+	flatpak --user install gnome org.gnome.Platform//3.24 || true
+	flatpak --user install gnome org.gnome.Sdk//3.24 || true
+# install gnome globally
+	flatpak install gnome org.gnome.Platform//3.22 || true
+	flatpak install gnome org.gnome.Sdk//3.22 || true
+	flatpak install gnome org.gnome.Platform//3.24 || true
+	flatpak install gnome org.gnome.Sdk//3.24 || true
+# install freedesktop stuff under user space
 	flatpak --user install gnome org.freedesktop.Sdk//1.4 || true
 	flatpak --user install gnome org.freedesktop.Platform//1.4 || true
+# install freedesktop stuff globaly
 	flatpak install gnome org.freedesktop.Sdk//1.4 || true
 	flatpak install gnome org.freedesktop.Platform//1.4 || true
 	flatpak remotes
@@ -102,6 +114,7 @@ build-install:
 	done
 
 delete-remotes:
+	flatpak remotes
 	flatpak --user remote-delete --force gnome
 	flatpak --user remote-delete --force flathub
 	flatpak remote-delete --force gnome
