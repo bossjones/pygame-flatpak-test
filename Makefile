@@ -119,3 +119,6 @@ delete-remotes:
 	flatpak --user remote-delete --force flathub
 	flatpak remote-delete --force gnome
 	flatpak remote-delete --force flathub
+
+install-flatpak-system-deps:
+	sudo dnf install flatpak-devel flatpak-builder flatpak-runtime-config -y
