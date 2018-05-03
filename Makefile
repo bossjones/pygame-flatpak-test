@@ -121,4 +121,4 @@ delete-remotes:
 	flatpak remote-delete --force flathub
 
 install-flatpak-system-deps:
-	sudo dnf install flatpak-devel flatpak-builder flatpak-runtime-config -y
+	sudo dnf install flatpak-devel flatpak-builder flatpak-runtime-config wget git bzip2 elfutils make ostree -y
