@@ -66,8 +66,7 @@ class Flatpacker:
         baseapp = 'org.pygame.BaseApp-py{}{}'.format(*self.config['python'].split('.'))
         get_baseapp(baseapp)
 
-        print("build-init --base"+baseapp+str(self.build_dir)+self.config['appid']+
-        'org.freedesktop.Sdk'+'org.freedesktop.Platform'+"1.4")
+        print("build-init --base {} {} {} org.freedesktop.Sdk org.freedesktop.Platform 1.4".format(baseapp,str(self.build_dir),self.config['appid']))
 
         flatpak('build-init', '--base', baseapp, str(self.build_dir), self.config['appid'],
                 'org.freedesktop.Sdk', 'org.freedesktop.Platform', '1.4')
