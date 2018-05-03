@@ -126,3 +126,9 @@ delete-remotes:
 
 install-flatpak-system-deps:
 	sudo dnf install flatpak-devel flatpak-builder flatpak-runtime-config wget git bzip2 elfutils make ostree -y
+
+pip-install:
+	pip install -U --user --no-cache-dir -I --force-reinstall pygame_fpak
+
+create-app:
+	python3 -m pygame_fpak pygame-fpak.toml
