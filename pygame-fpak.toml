@@ -1,0 +1,16 @@
+# Identifier based on a reverse domain name you control. E.g. if your
+# project is on Github, you could use io.github.username.reponame
+appid = "org.pygame.solarwolf"
+# Files/directories needed to run the game - relative paths from where
+# the config file lives.
+files = [
+  "solarwolf"
+]
+# The function to start your game. This will be called like:
+# from solarwolf.cli import main; main()
+entry-point = "solarwolf.cli:main"
+
+# Icons in different sizes. Icons should be square, sizes are pixels
+# along one side of a square. 32, 48 and 64 are common.
+[icons]
+64 = "dist/solarwolf.png"
