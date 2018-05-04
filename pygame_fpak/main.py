@@ -64,7 +64,8 @@ class Flatpacker:
         with (self.packing_dir / 'config.json').open('w') as f:
             json.dump(self.config, f, indent=2)
 
-        print("flatpak build {} /usr/bin/python3 {}".format(str(self.build_dir), str(build_script))
+        print("flatpak build {} /usr/bin/python3 {}".format(self.build_dir,build_script))
+
         run(['flatpak', 'build', str(self.build_dir), '/usr/bin/python3',
                 str(build_script)], cwd=str(self.project_dir), check=True)
 
