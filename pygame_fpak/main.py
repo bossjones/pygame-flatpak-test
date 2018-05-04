@@ -106,6 +106,7 @@ class InputError(ValueError):
     pass
 
 def check_config(config):
+    print(config)
     if config['python'] not in {'3.6', '3.4', '2.7'}:
         raise InputError("Python version should be 3.6, 3.4 or 2.7, not {}"
                          .format(config['python']))
