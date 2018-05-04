@@ -134,3 +134,12 @@ create-app:
 	python3 -m pygame_fpak pygame-fpak.toml
 
 app-install: pip-install create-app
+
+build-solarwolf.done: Makefile install-baseapp-py36.done
+	# Main build steps - set up $(build_dir) and build the app in it.
+	rm -rf $(build_dir)
+	flatpak build-init --base=org.pygame.BaseApp-py36 $(build_dir) org.pygame.solarwolf \
+				org.freedesktop.Sdk org.freedesktop.Platform 1.4
+	flatpak build $(build_dir) make build-install
+	flatpak build-finish $(build_dir) --socket=x11 --socket=pulseaudio --command=solarwolf
+	touch $@
