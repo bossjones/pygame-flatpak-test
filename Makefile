@@ -132,3 +132,5 @@ pip-install:
 
 create-app:
 	python3 -m pygame_fpak pygame-fpak.toml
+
+app-install: pip-install create-app
