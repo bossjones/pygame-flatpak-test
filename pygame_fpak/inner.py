@@ -40,7 +40,7 @@ def main():
     install_dir.mkdir(parents=True)
     for file in config['files']:
         if os.path.isdir(file):
-            print("isdir: cptree {}".format(file, str(install_dir/file))))
+            print("isdir: cptree {} {}".format(file,install_dir/file))
             copytree(file, str(install_dir / file),
                     ignore=ignore_patterns('__pycache__', '*.pyc'))
         else:
