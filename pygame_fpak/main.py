@@ -27,12 +27,12 @@ def get_baseapp(baseapp):
     if baseapp in installed_names:
         return
 
-    print('flatpak --user remote-add --if-not-exists --from pygame-bases https://takluyver.github.io/pygame-flatpak-test/pgbase.flatpakrepo')
+    print('CMD: flatpak --user remote-add --if-not-exists --from pygame-bases https://takluyver.github.io/pygame-flatpak-test/pgbase.flatpakrepo')
 
     flatpak('--user', 'remote-add', '--if-not-exists', '--from',
     'pygame-bases', 'https://takluyver.github.io/pygame-flatpak-test/pgbase.flatpakrepo')
 
-    print('flatpak --user install {}'.format(baseapp))
+    print('CMD: flatpak --user install {}'.format(baseapp))
 
     flatpak('--user', 'install', 'pygame-bases', baseapp)
 
@@ -49,10 +49,10 @@ class Flatpacker:
         self.packing_dir = self.project_dir / 'build' / 'flatpak'
         self.build_dir = self.packing_dir / 'build'
         self.repo_dir = self.project_dir / 'build' / 'flatpak-repo'
-        print("self.project_dir: {}".format(self.project_dir))
-        print("self.packing_dir: {}".format(self.packing_dir))
-        print("self.build_dir: {}".format(self.build_dir))
-        print("self.repo_dir: {}".format(self.repo_dir))
+        print("CMD: self.project_dir: {}".format(self.project_dir))
+        print("CMD: self.packing_dir: {}".format(self.packing_dir))
+        print("CMD: self.build_dir: {}".format(self.build_dir))
+        print("CMD: self.repo_dir: {}".format(self.repo_dir))
 
     def call_build_script(self):
         """Copy the build script and call it inside the flatpak build.
@@ -64,7 +64,7 @@ class Flatpacker:
         with (self.packing_dir / 'config.json').open('w') as f:
             json.dump(self.config, f, indent=2)
 
-        print("flatpak build {} /usr/bin/python3 {}".format(self.build_dir,build_script))
+        print("CMD: flatpak build {} /usr/bin/python3 {}".format(self.build_dir,build_script))
 
         run(['flatpak', 'build', str(self.build_dir), '/usr/bin/python3',
                 str(build_script)], cwd=str(self.project_dir), check=True)
@@ -78,7 +78,7 @@ class Flatpacker:
         baseapp = 'org.pygame.BaseApp-py{}{}'.format(*self.config['python'].split('.'))
         get_baseapp(baseapp)
 
-        print("build-init --base {} {} {} org.freedesktop.Sdk org.freedesktop.Platform 1.4".format(baseapp,str(self.build_dir),self.config['appid']))
+        print("CMD: build-init --base {} {} {} org.freedesktop.Sdk org.freedesktop.Platform 1.4".format(baseapp,str(self.build_dir),self.config['appid']))
 
         flatpak('build-init', '--base', baseapp, str(self.build_dir), self.config['appid'],
                 'org.freedesktop.Sdk', 'org.freedesktop.Platform', '1.4')
