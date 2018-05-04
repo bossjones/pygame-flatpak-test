@@ -1,3 +1,6 @@
+# At the moment, you can specify "3.6", "3.4" or "2.7".
+# 3.6 produces a somewhat bigger app to download.
+python = "3.6"
 # Identifier based on a reverse domain name you control. E.g. if your
 # project is on Github, you could use io.github.username.reponame
 appid = "org.pygame.solarwolf"
